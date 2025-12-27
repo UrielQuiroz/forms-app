@@ -1,7 +1,7 @@
 <h2>Reactivos: <small> Dinámicos </small></h2>
 <hr>
 
-<form autocomplete="off" [formGroup]="myForm">
+<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
     <!-- Nombre -->
     <div class="mb-3 row">
@@ -25,8 +25,12 @@
         <div class="col-sm-9">
 
             <div class="input-group">
+
                 <input class="form-control"
-                       placeholder="Agregar favorito">
+                       placeholder="Agregar favorito"
+                       [formControl]="newFavorite"
+                       (keydown.enter)="onAddToFavorites()"
+                       />
 
 
                 <button class="btn btn-outline-primary"
@@ -50,8 +54,10 @@
                     <input class="form-control"
                     [formControlName]="i">
 
-                    <button class="btn btn-outline-danger"
-                            type="button">
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="onDeleteFavorite(i)"
+                      type="button">
                       Eliminar
                   </button>
                 </div>
@@ -59,14 +65,16 @@
                   <span class="form-text text-danger">
                       {{ formUtils.getFieldErrorFromArray(favoriteGames, i) }}
                   </span>
-                  <!-- <span class="form-text text-danger">
-                      {{formUtils.getFieldError(myForm, 'name')}}
-                  </span> -->
                 }
 
             </div>
           }
 
+            @if( formUtils.isValidFiels(myForm, 'favoriteGames')) {
+              <span class="form-text text-danger">
+                Debe de tener al menos 2 juegos
+              </span>
+            }
         </div>
     </div>
 
@@ -77,7 +85,6 @@
             <button type="submit"
                     class="btn btn-primary float-end"
                     >
-                    <!-- [disabled]="myForm.invalid" -->
                 Guardar
             </button>
         </div>
@@ -97,5 +104,5 @@
 <br>
 
 <span>Agregar Juego</span>
-<!-- <pre>{{ 'object' | json }}</pre>
-<pre>{{ 'object' | json }}</pre> -->
+<pre>{{ myForm.controls['favoriteGames'].errors | json }}</pre>
+<pre>{{ myForm.controls['favoriteGames'].value | json }}</pre>

@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { FormUtils } from '../../../utils/form-utils';
 
 @Component({
@@ -12,6 +12,8 @@ export class DynamicPageComponent {
 
   private fb = inject(FormBuilder);
   formUtils = FormUtils;
+
+  newFavorite = new FormControl('', Validators.required)
 
   myForm: FormGroup = this.fb.group({
     name: ['', [ Validators.required, Validators.minLength(3)]],
@@ -28,10 +30,22 @@ export class DynamicPageComponent {
     return this.myForm.get('favoriteGames') as FormArray;
   }
 
-  // isValidFieldInArray(fromArray: FormArray, index: number) {
-  //   return (
-  //     fromArray.controls[index].errors && fromArray.controls[index].touched
-  //   )
-  // }
+  onAddToFavorites() {
+    if( this.newFavorite.invalid ) return;
+
+    const newGame = this.newFavorite.value;
+
+    this.favoriteGames.push(this.fb.control(newGame, Validators.required));
+
+    this.newFavorite.reset();
+  }
+
+  onDeleteFavorite(index: number) {
+    this.favoriteGames.removeAt(index);
+  }
+
+  onSubmit() {
+    this.myForm.markAllAsTouched();
+  }
 
 }
