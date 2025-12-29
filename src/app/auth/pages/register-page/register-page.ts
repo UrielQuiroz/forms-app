@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { FormUtils } from '../../../utils/form-utils';
 
 @Component({
@@ -19,7 +19,19 @@ export class RegisterPageComponent {
     username: ['', [Validators.required, Validators.minLength(6), Validators.pattern( FormUtils.notOnlySpacesPattern )]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     password2: ['', Validators.required]
+  },
+  {
+    validators: [ FormUtils.isFieldOneEqualFieldTwo('password', 'password2') ]
   })
+
+  // isFieldOneEqualFieldTwo(field1: string, field2: string) {
+  //   return (formGroup: AbstractControl) => {
+  //     const field1Value = formGroup.get(field1)?.value;
+  //     const field2Value = formGroup.get(field2)?.value;
+
+  //     return field1Value === field2Value ? null : { passwordsNotEquals: true }
+  //   }
+  // }
 
   onSubmit() {
     this.myForm.markAllAsTouched();
