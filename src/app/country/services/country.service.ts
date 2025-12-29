@@ -18,8 +18,6 @@ export class CountryService {
   getCountriesByRegion(region: string): Observable<Country[]> {
     if( !region ) return of([]);
 
-    console.log({ region });
-
     const url = `${this.baseUrl}/region/${region}?fields=cca3,name,borders`;
     return this.http.get<Country[]>(url);
   }

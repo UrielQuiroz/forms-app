@@ -87,7 +87,6 @@ export class FormUtils {
   }
 
   static async checkingServerResponse(control: AbstractControl): Promise< ValidationErrors | null> {
-    console.log('Validando...')
     await sleep();
 
     const formValue = control.value;

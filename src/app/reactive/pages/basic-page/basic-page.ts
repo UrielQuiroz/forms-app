@@ -57,7 +57,6 @@ export class BasicPageComponent {
       return;
     }
 
-    console.log(this.myForm.value);
     this.myForm.reset({
       price: 0,
       inStorage: 0

@@ -2,7 +2,7 @@
 <hr>
 
 <div class="row">
-    <div class="col">
+    <div class="col shadow-lg p-3 rounded">
 
         <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSave()">
 
@@ -79,7 +79,7 @@
 
 
 <div class="row">
-    <div class="col">
+    <div class="col shadow-lg p-3 mt-3 rounded">
 
         <span>Valid</span>
         <pre>{{ myForm.valid | json }}</pre>

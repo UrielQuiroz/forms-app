@@ -4,7 +4,7 @@
 <hr>
 
 
-<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form class="shadow-lg p-3 rounded" autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
     <!-- Radio -->
     <div class="row mb-3">
@@ -93,17 +93,19 @@
 
 </form>
 
+<div class="shadow-lg p-3 mt-3 rounded">
 
-<h5>Valor del formulario</h5>
-<pre>{{ myForm.value| json }}</pre>
-<br>
+  <h5>Valor del formulario</h5>
+  <pre>{{ myForm.value| json }}</pre>
+  <br>
 
-<h5>Persona</h5>
-<pre>{{ myForm.controls['gender'].value| json }}</pre>
-<br>
+  <h5>Persona</h5>
+  <pre>{{ myForm.controls['gender'].value| json }}</pre>
+  <br>
 
-<h5>Valid</h5>
-<pre>{{ myForm.valid | json }}</pre>
+  <h5>Valid</h5>
+  <pre>{{ myForm.valid | json }}</pre>
+</div>
 
 <!-- <h5>Términos</h5> -->
 <!-- <pre>{{ myForm.controls?.terminos?.errors | json }}</pre> -->

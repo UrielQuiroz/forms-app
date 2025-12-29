@@ -69,7 +69,6 @@ export class CountryPageComponent {
         )
       )
       .subscribe( borders => {
-        console.log({ borders })
         this.borders.set(borders)
       })
   }
